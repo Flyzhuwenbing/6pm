@@ -26,7 +26,7 @@ sel_width = Select(sel_width)
 
 lst = []
 results = []
-# 获取option标签，得颜色、尺码、宽度的信息
+# 提取option标签，得颜色、尺码、宽度的信息
 element = driver.find_elements_by_tag_name('option')
 for i in element:
     lst.append(i.text)
@@ -59,16 +59,16 @@ for i in color_lst:
             if stock:
                 stock = next(element for element in stock if element.is_displayed())
                 print(stock.text)
-                results.append([i, price.text,j, k,stock.text])
+                results.append([i,j, k,price.text,stock.text])
             else:
                 print('out of stock')
-                results.append([i,price.text, j, k, 'out of stock'])
+                results.append([i, j, k, price.text,'out of stock'])
 # print(results)
 
 #写入csv文件中
 with open('6pm.csv','w') as csvfile:
     writer =csv.writer(csvfile)
-    writer.writerow(['颜色', '价格', '尺码', '宽度', '库存'])
+    writer.writerow(['颜色', '尺码', '宽度','价格','库存'])
     for data in results:
         writer.writerow(data)
 
